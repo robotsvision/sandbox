@@ -48,10 +48,39 @@ void free_tree(node_t* node) {
     free(node);
 }
 
+int add_new_node(node_t* root, const char* data, const char* dest, bool yes) {
+    if (!root || !data || !dest) 
+        return -1;
+
+    if (strcmp(root->data, dest) == 0) {
+        printf("YES!");
+        node_t* new_node = create_node(data);
+
+        if (!new_node)
+            return -1;
+
+        if (yes) {
+            root->yes = new_node;
+        } else {
+            root->no = new_node;
+        }
+        return 0;
+    }
+
+    add_new_node(root->yes, data, dest, yes);
+    add_new_node(root->no, data, dest, yes);
+    return 0;
+}
+
 int main(void) {
     node_t* root = create_node("человек?");
-    root->yes = create_node("Лена");
+    root->yes = create_node("Лена?");
     root->no = create_node("кошка");
+
+    printf("\nДерево фактов:\n");
+    print_tree(root, 0);
+
+    printf("%d", add_new_node(root, "Щередина", "Лена?", true));
 
     printf("\nДерево фактов:\n");
     print_tree(root, 0);
