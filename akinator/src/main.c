@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// Структура узла дерева
 typedef struct node {
     char* data;        
     struct node* prev;
@@ -73,19 +72,6 @@ int add_new_node(node_t* root, const char* data, const char* dest, bool yes) {
 }
 
 int main(void) {
-    node_t* root = create_node("человек?");
-    root->yes = create_node("Лена?");
-    root->no = create_node("кошка");
-
-    printf("\nДерево фактов:\n");
-    print_tree(root, 0);
-
-    printf("%d", add_new_node(root, "Щередина", "Лена?", true));
-
-    printf("\nДерево фактов:\n");
-    print_tree(root, 0);
-
-    free_tree(root);
 
     return 0;
 }
